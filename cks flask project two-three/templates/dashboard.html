@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lavisco Mgt System - Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="dashboard-container">
+        <h1><center>Welcome to the Lavisco Election Management System</center></h1>
+        <nav><center>
+            <ul>
+                <li><a href="{{ url_for('register_voter') }}">Register Voter</a></li>
+                <li><a href="{{ url_for('manage_posts') }}">Manage Posts</a></li>
+                <li><a href="{{ url_for('register_candidate') }}">Register Candidate</a></li>
+                <li><a href="{{ url_for('manage_polling_stations') }}" class="nav-button">Manage Polling Stations</a></li>
+                <li><a href="{{ url_for('enter_votes') }}">Enter Votes</a></li>
+                <li><a href="{{ url_for('results') }}">View Results</a></li>
+                <!-- <li><a href="{{ url_for('candidate_results', candidate_id=1) }}">Candidate Results</a></li> -->
+                <a href="{{ url_for('all_results') }}" class="nav-button">All Results</a>
+<a href="{{ url_for('charts') }}" class="nav-button">View Vote Charts</a>
+
+                <li><a href="{{ url_for('winners') }}" class="nav-button">Winners per Post</a></li>
+            </ul>
+        </center> </nav>
+    </div>
+    <footer><center><b>DEVLOPED BY CKS &copy;2025</b></center></footer>
+</body>
+</html>
+ 

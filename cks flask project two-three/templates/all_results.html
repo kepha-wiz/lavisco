@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>All Candidate Results - Lavisco Mgt System</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        h2 { color: #333; }
+        table { width: 100%; border-collapse: collapse; margin-bottom: 30px; }
+        th, td { border: 1px solid #ccc; padding: 8px; text-align: left; }
+        th { background-color: #007bff; color: white; }
+        tr:nth-child(even) { background-color: #f2f2f2; }
+        .back { margin-top: 20px; }
+        .nav-button {
+            display: inline-block;
+            padding: 8px 12px;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+        }
+        .nav-button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <a href="{{ url_for('dashboard') }}" class="nav-button">Dashboard</a>
+    <h1>All Candidate Results by Polling Station</h1>
+
+    {% for entry in results %}
+        <h2>{{ entry.candidate }} - {{ entry.post }}</h2>
+        {% if entry.votes %}
+        <table>
+            <thead>
+                <tr>
+                    <th>Polling Station</th>
+                    <th>Votes</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for station, count in entry.votes %}
+                <tr>
+                    <td>{{ station }}</td>
+                    <td>{{ count }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+            <p>No votes found for this candidate.</p>
+        {% endif %}
+    {% endfor %}
+</body>
+</html>

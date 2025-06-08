@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Lavisco Mgt System - Register Candidate</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+</head>
+<body>
+    <div class="form-container">
+        <!-- Dashboard button -->
+        <a href="{{ url_for('dashboard') }}" class="button">Dashboard</a>
+
+        <h2>Register Candidate</h2>
+        <form method="POST">
+            <input type="text" name="name" placeholder="Candidate Name" required />
+            <select name="post" required>
+                <option value="">Select Post</option>
+                {% for post in posts %}
+                    <option value="{{ post.id }}">{{ post.name }}</option>
+                {% endfor %}
+            </select>
+            <button type="submit">Register Candidate</button>
+        </form>
+    </div>
+</body>
+</html>

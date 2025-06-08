@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vote Distribution Charts - Lavisco Mgt System</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f6f8;
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav-button {
+            display: inline-block;
+            padding: 10px 18px;
+            margin: 20px auto;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .nav-button:hover {
+            background-color: #0056b3;
+        }
+
+        .chart-container {
+            max-width: 400px;
+            width: 90%;
+            background: #fff;
+            padding: 20px;
+            margin: 30px auto;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            border-radius: 8px;
+        }
+
+        h3 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+
+    <div style="text-align: center;">
+        <a href="{{ url_for('dashboard') }}" class="nav-button">← Back to Dashboard</a>
+    </div>
+
+    {% for chart in chart_data %}
+        <div class="chart-container">
+            <h3>{{ chart.post }}</h3>
+            <canvas id="chart-{{ loop.index }}"></canvas>
+            <script>
+                const ctx{{ loop.index }} = document.getElementById('chart-{{ loop.index }}').getContext('2d');
+                new Chart(ctx{{ loop.index }}, {
+                    type: 'pie',
+                    data: {
+                        labels: {{ chart.labels | tojson }},
+                        datasets: [{
+                            data: {{ chart.votes | tojson }},
+                            backgroundColor: [
+                                '#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF', '#FF9F40',
+                                '#8E44AD', '#2ECC71', '#E74C3C', '#1ABC9C', '#F39C12'
+                            ]
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: {
+                            legend: {
+                                position: 'bottom',
+                            },
+                            title: {
+                                display: true,
+                                text: 'Votes per Candidate'
+                            }
+                        }
+                    }
+                });
+            </script>
+        </div>
+    {% endfor %}
+</body>
+</html>

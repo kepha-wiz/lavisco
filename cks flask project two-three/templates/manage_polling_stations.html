@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Manage Polling Stations</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+    <style>
+        .delete-button {
+            margin-left: 10px;
+            background-color: red;
+            color: white;
+            border: none;
+            padding: 4px 8px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .delete-button:hover {
+            background-color: darkred;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="{{ url_for('dashboard') }}" class="nav-button">Dashboard</a></li>
+            <li><a href="{{ url_for('manage_polling_stations') }}" class="nav-button">Manage Polling Stations</a></li>
+            <li><a href="{{ url_for('enter_votes') }}" class="nav-button">Enter Votes</a></li>
+        </ul>
+    </nav>
+
+    <div class="form-container">
+        <h2>Manage Polling Stations</h2>
+        <form method="POST">
+            <input type="text" name="station_name" placeholder="Polling Station Name" required />
+            <button type="submit">Add Polling Station</button>
+        </form>
+
+        <h3>Existing Polling Stations</h3>
+        <ul>
+            {% for station in stations %}
+                <li>
+                    {{ station.name }}
+                    <form method="POST" action="{{ url_for('delete_polling_station', station_id=station.id) }}" style="display:inline;">
+                        <button type="submit" class="delete-button">Delete</button>
+                    </form>
+                </li>
+            {% else %}
+                <li>No polling stations added yet.</li>
+            {% endfor %}
+        </ul>
+    </div>
+</body>
+</html>

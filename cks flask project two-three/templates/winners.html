@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Winners Per Post - Lavisco Mgt System</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+            background-color: #f8f9fa;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        table {
+            width: 80%;
+            margin: 20px auto;
+            border-collapse: collapse;
+            background-color: #fff;
+        }
+        th, td {
+            padding: 12px;
+            border: 1px solid #ddd;
+            text-align: center;
+        }
+        th {
+            background-color: #007bff;
+            color: white;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        .buttons {
+            text-align: center;
+            margin-top: 30px;
+        }
+        .btn {
+            padding: 10px 20px;
+            text-decoration: none;
+            background-color: #007bff;
+            color: white;
+            border-radius: 5px;
+            margin: 0 10px;
+        }
+        .btn:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <h1>Winners Per Post</h1>
+    <table>
+        <tr>
+            <th>Post</th>
+            <th>Candidate</th>
+            <th>Total Votes</th>
+        </tr>
+        {% for winner in winners %}
+        <tr>
+            <td>{{ winner.post }}</td>
+            <td>{{ winner.candidate }}</td>
+            <td>{{ winner.votes }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <div class="buttons">
+        <a href="{{ url_for('dashboard') }}" class="btn">Back to Dashboard</a>
+        <a href="{{ url_for('export_pdf') }}" class="btn" target="_blank">Export as PDF</a>
+    </div>
+</body>
+</html>

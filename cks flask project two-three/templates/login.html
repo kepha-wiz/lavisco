@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lavisco Mgt System - Login</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="login-container">
+        <center style="background-image: url("badge.png);"><img src="{{ url_for('static', filename='images/badge.png') }}" alt="Lavisco Logo">
+            </center>
+        <h2>Login to Lavisco Election Management System</h2>
+        <form method="POST">
+            <input type="text" name="username" placeholder="Username" required>
+            <input type="password" name="password" placeholder="Password" required>
+            <button type="submit">Login</button>
+        </form>
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <div class="error">{{ messages[0] }}</div>
+            {% endif %}
+        {% endwith %}
+    </div>
+    <footer><center><b>DEVLOPED BY CKS &copy;2025</b></center></footer>
+</body>
+</html>
+ 
