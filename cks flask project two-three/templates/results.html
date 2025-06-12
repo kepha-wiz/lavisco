@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lavisco Mgt System - Results</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='favicon.png') }}">
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="{{ url_for('dashboard') }}" class="nav-button">Home</a></li>
+            <li><a href="{{ url_for('enter_votes') }}" class="nav-button">Enter Votes</a></li>
+            <li><a href="{{ url_for('results') }}" class="nav-button">View Results</a></li>
+            <li><a href="{{ url_for('winners') }}" class="nav-button">View winners per post</a></li>
+        </ul>
+    </nav>
+    <div class="results-container">
+        <h2>Election Results</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Candidate</th>
+                    <th>Post</th>
+                    <th>Total Votes</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for result in results %}
+                    <tr>
+                        <td>{{ result[0] }}</td> <!-- Candidate Name -->
+                        <td>{{ result[1] }}</td> <!-- Post Name -->
+                        <td>{{ result[2] }}</td> <!-- Vote Count -->
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
+ 

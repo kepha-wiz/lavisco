@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Results for {{ candidate.name }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='favicon.png') }}">
+</head>
+<body>
+    <nav>
+        <a href="{{ url_for('dashboard') }}" class="nav-button">Dashboard</a>
+    </nav>
+
+    <h2>Results for {{ candidate.name }}</h2>
+
+    {% if results %}
+    <table border="1" cellpadding="8" cellspacing="0">
+        <thead>
+            <tr>
+                <th>Polling Station</th>
+                <th>Votes</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for station_name, vote_count in results %}
+            <tr>
+                <td>{{ station_name }}</td>
+                <td>{{ vote_count }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <p>No results found for this candidate yet.</p>
+    {% endif %}
+</body>
+</html>

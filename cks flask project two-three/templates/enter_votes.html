@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Lavisco Mgt System - Enter Votes</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='favicon.png') }}">
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="{{ url_for('dashboard') }}" class="nav-button">Home</a></li>
+            <li><a href="{{ url_for('enter_votes') }}" class="nav-button">Enter Votes</a></li>
+            <li><a href="{{ url_for('results') }}" class="nav-button">View Results</a></li>
+        </ul>
+    </nav>
+    <div class="form-container">
+        <h2>Enter Votes</h2>
+        <form method="POST">
+            <label for="candidate">Candidate</label>
+            <select name="candidate" id="candidate" required>
+                <option value="">Select Candidate</option>
+                {% for candidate in candidates %}
+                    <option value="{{ candidate.id }}">{{ candidate.name }} - {{ candidate.post.name }}</option>
+                {% endfor %}
+            </select>
+
+            <label for="station">Polling Station</label>
+            <select name="station" id="station" required>
+                <option value="">Select Polling Station</option>
+                {% for station in stations %}
+                    <option value="{{ station.id }}">{{ station.name }}</option>
+                {% endfor %}
+            </select>
+
+            <label for="votes">Vote Count</label>
+            <input type="number" name="votes" id="votes" min="0" placeholder="Vote Count" required />
+
+            <button type="submit" style="background-color: rgb(11, 95, 179);">Enter Vote</button>
+        </form>
+    </div>
+</body>
+</html>
